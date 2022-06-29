@@ -1,0 +1,34 @@
+{
+	"name": "notebook_activity_pipeline4",
+	"properties": {
+		"activities": [
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/kiramkonda.hemanth@gmail.com/practice",
+					"baseParameters": {
+						"name": "hemanth",
+						"location": "hyderabad"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-06-27T06:34:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

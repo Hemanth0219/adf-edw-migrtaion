@@ -1,0 +1,59 @@
+{
+	"name": "notebook_activity_pipeline5",
+	"properties": {
+		"activities": [
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/kiramkonda.hemanth@gmail.com/practice2",
+					"baseParameters": {
+						"name": "hemanth",
+						"location": "hyderabad"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Notebook1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "avg",
+					"value": {
+						"value": "@string(activity('Notebook1').output.runOutput)",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"avg": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-06-27T06:34:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

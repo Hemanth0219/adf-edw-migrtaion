@@ -1,0 +1,9 @@
+{
+	"name": "adf-june",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1276aa8f-8927-4c7c-9e4b-045ceb9391c8",
+		"tenantId": "3ef5eaf1-bb0f-4aa4-8df4-0c75a85b2de1"
+	}
+}

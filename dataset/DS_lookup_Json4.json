@@ -1,0 +1,54 @@
+{
+	"name": "DS_lookup_Json4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"folder_name": {
+				"type": "string"
+			},
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(item().table_name,'.json')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('outbound/',dataset().folder_name)",
+					"type": "Expression"
+				},
+				"fileSystem": "devcontainer"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"CategoryID": {
+					"type": "string"
+				},
+				"CategoryName": {
+					"type": "string"
+				},
+				"id": {
+					"type": "integer"
+				},
+				"student_name": {
+					"type": "string"
+				},
+				"fee": {
+					"type": "integer"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

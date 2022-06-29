@@ -1,0 +1,16 @@
+{
+	"name": "DS_lookup_MySqlTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_MySql1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "MySqlTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "`metadata_table`"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

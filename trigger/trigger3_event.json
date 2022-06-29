@@ -1,0 +1,26 @@
+{
+	"name": "trigger3_event",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline3_event triggr",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/devcontainer/blobs/inbound/inbound1",
+			"blobPathEndsWith": "json",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/30c7e10e-877b-428b-87b8-9e8f2991c296/resourceGroups/RG_June/providers/Microsoft.Storage/storageAccounts/adlsjune20",
+			"events": [
+				"Microsoft.Storage.BlobCreated",
+				"Microsoft.Storage.BlobDeleted"
+			]
+		}
+	}
+}
