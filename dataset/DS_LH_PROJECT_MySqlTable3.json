@@ -1,0 +1,15 @@
+{
+	"name": "DS_LH_PROJECT_MySqlTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_MySql1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "azure_project"
+		},
+		"annotations": [],
+		"type": "MySqlTable",
+		"schema": []
+	}
+}
