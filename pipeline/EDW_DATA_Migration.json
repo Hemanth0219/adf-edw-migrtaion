@@ -109,7 +109,7 @@
 				"typeProperties": {
 					"variableName": "qry",
 					"value": {
-						"value": "@concat('select * from ',variables('tbl_nm'),' where ',variables('inc_col'), ' = ',variables('ing_dt'))",
+						"value": "@concat('select * from ',variables('tbl_nm'),' where ',variables('inc_col'), ' =''',variables('ing_dt'),'''')",
 						"type": "Expression"
 					}
 				}
