@@ -5,6 +5,14 @@
 			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"folder_nm": {
+				"type": "string"
+			},
+			"file_nm": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "azure_project"
 		},
@@ -12,7 +20,16 @@
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation"
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().file_nm",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().folder_nm",
+					"type": "Expression"
+				},
+				"fileSystem": "devcontainer"
 			}
 		},
 		"schema": {}
