@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-june"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
+		"AzureMySql1_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"LS_LH_SqlServer1_connectionString": {
+			"value": ""
+		},
+		"LS_MySql1_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://adlsjune20.dfs.core.windows.net/"
+		},
+		"LS_AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://myKeyVaultjune.vault.azure.net/"
+		},
+		"LS_keyvault_AzureDataLakeStorage2_properties_typeProperties_url": {
+			"value": "https://adlsjune20.dfs.core.windows.net"
+		},
+		"trigger3_event_properties_typeProperties_scope": {
+			"value": "/subscriptions/30c7e10e-877b-428b-87b8-9e8f2991c296/resourceGroups/RG_June/providers/Microsoft.Storage/storageAccounts/adlsjune20"
+		}
+	}
+}
