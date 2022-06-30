@@ -1,0 +1,19 @@
+{
+	"name": "DS_LH_SqlServerTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_LH_SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "azure_project"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "metadata"
+		}
+	}
+}
