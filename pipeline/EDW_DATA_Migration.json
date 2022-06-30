@@ -161,7 +161,17 @@
 				"outputs": [
 					{
 						"referenceName": "DS_ADLS_AZ_Json4",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"folder_nm": {
+								"value": "@concat('Transient/',variables('tbl_nm'))",
+								"type": "Expression"
+							},
+							"file_nm": {
+								"value": "@concat(variables('tbl_nm'),'.json')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
