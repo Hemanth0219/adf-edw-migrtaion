@@ -103,6 +103,12 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
+					},
+					{
+						"activity": "sensitive_col",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
 				"userProperties": [],
@@ -174,6 +180,60 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/rangahemanth123@gmail.com/BV_Project-H",
+					"baseParameters": {
+						"table_nm": {
+							"value": "@variables('tbl_nm')",
+							"type": "Expression"
+						},
+						"sensitive_cols": {
+							"value": "@variables('sensitive_col')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "sensitive_col",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "sensitive_col",
+					"value": "@activity('Lookup1').output.firstRow.sensitive_cols "
+				}
 			}
 		],
 		"variables": {
@@ -187,6 +247,9 @@
 				"type": "String"
 			},
 			"qry": {
+				"type": "String"
+			},
+			"sensitive_col": {
 				"type": "String"
 			}
 		},
