@@ -62,7 +62,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "inc_col",
-					"value": "@activity('Lookup1').output.firstRow.incremental_col "
+					"value": {
+						"value": "@activity('Lookup1').output.firstRow.incremental_col ",
+						"type": "Expression"
+					}
 				}
 			},
 			{
@@ -79,7 +82,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "ing_dt",
-					"value": "@activity('Lookup1').output.firstRow.ingestion_dt "
+					"value": {
+						"value": "@activity('Lookup1').output.firstRow.ingestion_dt ",
+						"type": "Expression"
+					}
 				}
 			},
 			{
@@ -170,7 +176,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"folder_nm": {
-								"value": "@concat('Transient/',variables('tbl_nm'))",
+								"value": "@concat('Transient/BV/',variables('tbl_nm'))",
 								"type": "Expression"
 							},
 							"file_nm": {
@@ -232,7 +238,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "sensitive_col",
-					"value": "@activity('Lookup1').output.firstRow.sensitive_cols "
+					"value": {
+						"value": "@activity('Lookup1').output.firstRow.sensitive_cols ",
+						"type": "Expression"
+					}
 				}
 			}
 		],
