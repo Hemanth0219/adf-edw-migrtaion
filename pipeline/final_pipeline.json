@@ -1,0 +1,56 @@
+{
+	"name": "final_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "reviews",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "products",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "reviews",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "catg",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "products",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "EDW_DATA_Migration_categories",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "azure _project pipelines"
+		},
+		"annotations": []
+	}
+}
