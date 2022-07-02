@@ -1,5 +1,5 @@
 {
-	"name": "EDW_DATA_Migration_for_one_table",
+	"name": "EDW_DATA_Migration_reviews",
 	"properties": {
 		"activities": [
 			{
