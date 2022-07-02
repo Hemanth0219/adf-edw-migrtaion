@@ -25,10 +25,286 @@
 						"referenceName": "DS_LH_SqlServerTable1",
 						"type": "DatasetReference"
 					},
-					"firstRowOnly": false
+					"firstRowOnly": true
+				}
+			},
+			{
+				"name": "get_tbl_name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tbl_nm",
+					"value": {
+						"value": "@activity('Lookup1').output.firstRow.table_name",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "get inc_col",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "inc_col",
+					"value": {
+						"value": "@activity('Lookup1').output.firstRow.incremental_col ",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "get_ind_dt",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ing_dt",
+					"value": {
+						"value": "@activity('Lookup1').output.firstRow.ingestion_dt ",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "getQuery",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "get_tbl_name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "get inc_col",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "get_ind_dt",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "sensitive_col",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "qry",
+					"value": {
+						"value": "@concat('select * from ',variables('tbl_nm'),' where ',variables('inc_col'), ' =''',variables('ing_dt'),'''')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "getQuery",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "MySqlSource",
+						"query": {
+							"value": "@variables('qry')",
+							"type": "Expression"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_LH_PROJECT_MySqlTable3",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ADLS_AZ_Json4",
+						"type": "DatasetReference",
+						"parameters": {
+							"folder_nm": {
+								"value": "@concat('Transient/BV/',variables('tbl_nm'))",
+								"type": "Expression"
+							},
+							"file_nm": {
+								"value": "@concat(variables('tbl_nm'),'.json')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/rangahemanth123@gmail.com/BV_Project-H",
+					"baseParameters": {
+						"table_nm": {
+							"value": "@variables('tbl_nm')",
+							"type": "Expression"
+						},
+						"sensitive_cols": {
+							"value": "@variables('sensitive_col')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "sensitive_col",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "sensitive_col",
+					"value": {
+						"value": "@activity('Lookup1').output.firstRow.sensitive_cols ",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "SQL_Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Notebook1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[updateingestiondt]",
+					"storedProcedureParameters": {
+						"ingestiondt ": {
+							"value": {
+								"value": "@variables('ing_dt')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"tablename ": {
+							"value": {
+								"value": "@variables('tbl_nm')",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_LH_SqlServer1",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
+		"variables": {
+			"tbl_nm": {
+				"type": "String"
+			},
+			"inc_col": {
+				"type": "String"
+			},
+			"ing_dt": {
+				"type": "String"
+			},
+			"qry": {
+				"type": "String"
+			},
+			"sensitive_col": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "azure _project pipelines"
 		},
