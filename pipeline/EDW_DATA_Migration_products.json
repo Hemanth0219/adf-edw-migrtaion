@@ -1,5 +1,5 @@
 {
-	"name": "EDW_DATA_Migration",
+	"name": "EDW_DATA_Migration_products",
 	"properties": {
 		"activities": [
 			{
@@ -25,7 +25,7 @@
 						"referenceName": "DS_LH_SqlServerTable1",
 						"type": "DatasetReference"
 					},
-					"firstRowOnly": true
+					"firstRowOnly": false
 				}
 			},
 			{
@@ -43,7 +43,7 @@
 				"typeProperties": {
 					"variableName": "tbl_nm",
 					"value": {
-						"value": "@activity('Lookup1').output.firstRow.table_name",
+						"value": "@activity('Lookup1').output.value[1].table_name",
 						"type": "Expression"
 					}
 				}
@@ -63,7 +63,7 @@
 				"typeProperties": {
 					"variableName": "inc_col",
 					"value": {
-						"value": "@activity('Lookup1').output.firstRow.incremental_col ",
+						"value": "@activity('Lookup1').output.value[1].incremental_col ",
 						"type": "Expression"
 					}
 				}
@@ -83,7 +83,7 @@
 				"typeProperties": {
 					"variableName": "ing_dt",
 					"value": {
-						"value": "@activity('Lookup1').output.firstRow.ingestion_dt ",
+						"value": "@activity('Lookup1').output.value[1].ingestion_dt ",
 						"type": "Expression"
 					}
 				}
@@ -207,14 +207,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/rangahemanth123@gmail.com/BV_Project-H",
+					"notebookPath": "/Users/rangahemanth123@gmail.com/BV_Project-H_products",
 					"baseParameters": {
 						"table_nm": {
 							"value": "@variables('tbl_nm')",
-							"type": "Expression"
-						},
-						"sensitive_cols": {
-							"value": "@variables('sensitive_col')",
 							"type": "Expression"
 						}
 					}
@@ -239,7 +235,7 @@
 				"typeProperties": {
 					"variableName": "sensitive_col",
 					"value": {
-						"value": "@activity('Lookup1').output.firstRow.sensitive_cols ",
+						"value": "@activity('Lookup1').output.value[1].sensitive_cols ",
 						"type": "Expression"
 					}
 				}
