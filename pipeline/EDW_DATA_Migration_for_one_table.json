@@ -1,5 +1,5 @@
 {
-	"name": "EDW_DATA_Migration",
+	"name": "EDW_DATA_Migration_for_one_table",
 	"properties": {
 		"activities": [
 			{
