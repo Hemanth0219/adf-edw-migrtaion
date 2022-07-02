@@ -243,6 +243,49 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "SQL_Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Notebook1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[updateingestiondt]",
+					"storedProcedureParameters": {
+						"ingestiondt ": {
+							"value": {
+								"value": "@variables('ing_dt')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"tablename ": {
+							"value": {
+								"value": "@variables('tbl_nm')",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_LH_SqlServer1",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"variables": {
