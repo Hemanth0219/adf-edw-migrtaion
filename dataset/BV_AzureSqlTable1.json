@@ -1,0 +1,48 @@
+{
+	"name": "BV_AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase2",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BV"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "table_name",
+				"type": "varchar"
+			},
+			{
+				"name": "source_name",
+				"type": "varchar"
+			},
+			{
+				"name": "table_type",
+				"type": "varchar"
+			},
+			{
+				"name": "Column_names",
+				"type": "varchar"
+			},
+			{
+				"name": "sensitive_cols",
+				"type": "varchar"
+			},
+			{
+				"name": "incremental_col",
+				"type": "varchar"
+			},
+			{
+				"name": "ingestion_dt",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "metadata"
+		}
+	}
+}

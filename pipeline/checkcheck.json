@@ -1,0 +1,26 @@
+{
+	"name": "checkcheck",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "name",
+					"value": {
+						"value": "king",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"name": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
