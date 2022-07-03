@@ -207,7 +207,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/rangahemanth123@gmail.com/BV_Project-H",
+					"notebookPath": "/Users/rangahemanth123@gmail.com/BV_Project-H_reviews",
 					"baseParameters": {
 						"table_nm": {
 							"value": "@variables('tbl_nm')",
