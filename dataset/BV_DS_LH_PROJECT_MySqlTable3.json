@@ -1,0 +1,15 @@
+{
+	"name": "BV_DS_LH_PROJECT_MySqlTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_MySql1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BV"
+		},
+		"annotations": [],
+		"type": "MySqlTable",
+		"schema": []
+	}
+}
